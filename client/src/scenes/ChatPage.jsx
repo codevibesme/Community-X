@@ -89,7 +89,7 @@ const ChatPage = () => {
             <header>
                 <h1 className="text-xl min-h-fit bg-black font-Noto font-bold text-white  px-8 py-4">Hello World!</h1>
             </header>
-            <main className="overflow-y-scroll px-6 my-4 scroll-smooth hover:scroll-auto">
+            <main className="overflow-y-auto px-8 my-4 scroll-smooth hover:scroll-auto">
                 {
                     messages.map((message) => (
                         <div className="bg-slate-400 text-center text-white text-bold text-xl mb-8">{message}</div>
