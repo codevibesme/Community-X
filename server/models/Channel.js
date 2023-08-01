@@ -4,6 +4,9 @@ const channelSchema = mongoose.Schema({
     name: {
         type: String,
     },
+    description: {
+        type: String,
+    },
     members: {
         type: [],
     },

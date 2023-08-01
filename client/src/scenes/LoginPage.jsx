@@ -1,10 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { setUser, setToken } from '../states/stateSlice';
 const LoginPage = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,12 +19,15 @@ const LoginPage = () => {
             },
             body: JSON.stringify(guest),
         });
-        console.log(response);
         const { user, token } = await response.json();
-        console.log(user, token);
-        if(user)
+    
+        if(user) {
+            dispatch(setUser({user}));
+            dispatch(setToken({token}));
             navigate("/");
+        }
     }
+    
     return (
         <div className="bg-black text-2xl h-screen w-full flex justify-center flex-col ">
             <h1 className="text-5xl text-white  mx-auto mb-10 font-bold">🧨WELCOME TO COMMUNITY-X💀</h1>

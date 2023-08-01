@@ -1,38 +1,54 @@
-import React from 'react'
-import ChatPage from './ChatPage'
-const AllChannels = ({channels}) => {
-  return (
-    <div className="min-h-screen flex flex-row font-Noto text-white">
-        <div className="min-h-full bg-black w-1/4 p-5 flex flex-col text-lg">
-            <header className="font-bold w-full flex justify-between">
-                <div>
-                    <p>Channels</p>
-                </div>
-                <button className="text-2xl">+</button>
-            </header>
-            <nav className="w-fit px-4 my-3">
-                <span className="absolute">🔍</span>
-                <input type="text" className=" focus:outline-none ps-6 rounded-lg text-start border-0 w-9/12 h-fit text-white bg-slate-500"  />
-            </nav>
-            <main className="w-full mt-10">
-                <section id="channels" className="flex flex-col max-h-56 overflow-y-auto">
-                    {
-                        channels.map((channel)=>(
-                        <div className="font-bold mb-3 text-gray-400 hover:text-white">
-                            <p>{channel}</p>
-                        </div>
-                        ))
-                    }
-                </section>
-            </main>
-            <footer className="w-full flex flex-col h-full justify-end ">
-                <div className="font-bold ">{channels[0]}</div>
-            </footer>
+import React, { useEffect, useState } from 'react';
+import ChatPage from './ChatPage';
+import ChannelList from '../components/ChannelList.jsx';
+import UserOptions from '../components/UserOptions.jsx';
+import AddChannelPopUp from '../components/AddChannelPopUp';
+import { useRef } from 'react';
+const AllChannels = () => {
+    const modalRef = useRef(null);
+    const addRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+    const createChannel = async () => {
+        setIsVisible(true);
+        console.log("Clicked");
+    };
+    const handleClickOutside = (e) => {
+        if(modalRef.current && !modalRef.current.contains(e.target)){
+            if(addRef.current && addRef.current.contains(e.target))
+                setIsVisible(true);
+            else 
+            setIsVisible(false);
+        }
+    };
+    useEffect( () => {
+        document.addEventListener("click", handleClickOutside ,false);
+        return () => {
+            document.removeEventListener("click", handleClickOutside, false);
+        }
+    }, []);
+    return (
+        <div className="min-h-screen flex flex-row font-Noto text-white">
+            <div className="min-h-full bg-black w-1/4 p-5 flex flex-col text-lg">
+                <header className="font-bold w-full flex justify-between">
+                    <div>
+                        <p>Channels</p>
+                    </div>
+                    <button className="text-2xl" onClick={createChannel} ref={addRef}>+</button>
+                </header>
+                <nav className="w-fit px-4 my-3">
+                    <span className="absolute">🔍</span>
+                    <input type="text" className=" focus:outline-none ps-6 rounded-lg text-start border-0 w-9/12 h-fit text-white bg-slate-500"  />
+                </nav>
+                {isVisible && (<div ref={modalRef} className=" py-4  px-8 border-4 h-fit w-2/5 left-1/3 right-1/3 absolute bg-black text-white z-40 border-purple-950 rounded-2xl text-xl">
+                    <AddChannelPopUp />
+                </div>)}
+                <ChannelList />
+                <UserOptions />
+            </div>
+            <ChatPage />
         </div>
-        <ChatPage />
-    </div>
-    
-  )
+        
+    );
 }
 
 export default AllChannels

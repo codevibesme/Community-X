@@ -2,11 +2,12 @@ import Channel from "../models/Channel.js";
 
 export const create_channel = async (req, res) => {
     try {
-        const { name } = req.body;
+        const { name, description } = req.body;
         const duplicateChannel = await Channel.findOne({name}).exec();
         if(duplicateChannel) return res.status(409).json({message: "Channel with same name exists"});
         const channel = await new Channel({
-            name
+            name,
+            description,
         });
         const newChannel = await channel.save();
         res.status(201).json({channel: newChannel});

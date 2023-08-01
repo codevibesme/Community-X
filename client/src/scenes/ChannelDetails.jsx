@@ -1,6 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router';
 import ChatPage from './ChatPage';
+import MemberList from '../components/MemberList.jsx';
+import UserOptions from '../components/UserOptions';
 const ChannelDetails = ({users}) => {
     const navigate = useNavigate();
     const handleClick = () => {
@@ -19,23 +21,9 @@ const ChannelDetails = ({users}) => {
                         Pellentesque sagittis elit enim, sit amet ultrices tellus accumsan quis. In gravida mollis purus, at interdum arcu tempor non
                     </p>
                     </section>
-                    <section id="members" className="flex flex-col">
-                        <p className="font-bold mb-3">MEMBERS</p>
-                        <div className="overflow-y-auto max-h-48">
-                            {
-                                users.map((user)=>(
-                                <div className="font-bold mb-3 text-gray-400">
-                                    <p>{user}</p>
-                                </div>
-                                ))
-                            }
-                        </div>
-                        
-                    </section>
+                    <MemberList users={users}/>
                 </main>
-                <footer className="w-full flex flex-col h-full justify-end ">
-                    <div className="font-bold ">{users[0]}</div>
-                </footer>
+                <UserOptions />
             </div>
             <ChatPage />
         </div>
