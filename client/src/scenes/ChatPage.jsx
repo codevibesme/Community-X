@@ -97,7 +97,7 @@ const ChatPage = () => {
                 }
             </main>
             <footer className="px-8 h-fit">
-                <button className="absolute right-9 h-10 w-10 px-2.5 bottom-3 bg-blue-400 rounded-lg hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-500/50"> <IoSendSharp className="text-lg text-center" /></button>
+                <button className="absolute right-9 h-10 w-10 px-2.5 bottom-3 bg-blue-400 rounded-lg hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-500/50 active:scale-95"> <IoSendSharp className="text-lg text-center" /></button>
                 <input type="text" placeholder="Type a message here "className="ps-4 pe-12 rounded-lg bg-gray-500 w-full h-12 focus:outline-none "/>
             </footer>
         </div>

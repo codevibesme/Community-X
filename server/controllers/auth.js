@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 export const register = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, picturePath } = await req.body;
         const duplicateUser = await User.findOne({email}).exec();
         if(duplicateUser){
             return res.status(409).json({message: "User with same email already exists!"});
@@ -14,12 +14,14 @@ export const register = async (req, res) => {
             name,
             email,
             password: hashedPassword,
+            picturePath,
         });
         const savedUser = await user.save();
         res.status(201).json({user: savedUser});
         
     } catch(err) {
         res.status(400).json({error: err.message});
+        console.log(err.message);
     }
 };
 

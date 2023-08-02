@@ -33,11 +33,11 @@ const AllChannels = () => {
                     <div>
                         <p>Channels</p>
                     </div>
-                    <button className="text-2xl" onClick={createChannel} ref={addRef}>+</button>
+                    <button className="text-2xl active:scale-95" onClick={createChannel} ref={addRef}>+</button>
                 </header>
                 <nav className="w-fit px-4 my-3">
                     <span className="absolute">🔍</span>
-                    <input type="text" className=" focus:outline-none ps-6 rounded-lg text-start border-0 w-9/12 h-fit text-white bg-slate-500"  />
+                    <input placeholder="Search..." type="text" className=" focus:outline-none ps-6 rounded-lg text-start border-0 w-full h-10 text-white bg-slate-500"  />
                 </nav>
                 {isVisible && (<div ref={modalRef} className=" py-4  px-8 border-4 h-fit w-2/5 left-1/3 right-1/3 absolute bg-black text-white z-40 border-purple-950 rounded-2xl text-xl">
                     <AddChannelPopUp />

@@ -1,7 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setChannel } from '../states/stateSlice';
+import { useNavigate } from 'react-router';
 const ChannelList = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const enterChannel = (channel) => {
+        dispatch(setChannel({channel}))
+        navigate(`/:${channel.name}`);
+    }
     const [channelList, setChannelList] = useState([]);
     const token = useSelector( (state) => state.token);
     const getChannels = async () => {
@@ -18,11 +26,11 @@ const ChannelList = () => {
         getChannels();
     }, []) //eslint-disable-line
   return (
-    <main className="w-full mt-10">
+    <main className="w-full mt-8">
         <section id="channels" className="flex flex-col max-h-56 overflow-y-auto">
             {   channelList && (
                 channelList.map((channel)=>(
-                <div className="font-bold mb-3 text-gray-400 hover:text-white">
+                <div className="font-bold mb-3 text-gray-400 hover:text-white" onClick={()=>enterChannel(channel)}>
                     <p>{channel.name}</p>
                 </div>
                 )) )
