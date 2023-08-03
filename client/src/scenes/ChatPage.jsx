@@ -13,7 +13,7 @@ const ChatPage = () => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const saveToDB = async (chat) => {
-        const response = await fetch(`https://communityx.onrender.com/chat/send`, {
+        await fetch(`https://communityx.onrender.com/chat/send`, {
             method:"POST",
             headers:{
                 'Content-Type': 'application/json',
