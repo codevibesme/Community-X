@@ -41,7 +41,7 @@ const upload = multer({ storage: storage });
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://community-x.netlify.app",
         methods:["GET", "POST", "PUT"]
     },
 });
