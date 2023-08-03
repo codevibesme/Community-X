@@ -35,7 +35,7 @@ const AllChannels = () => {
                     </div>
                     <button className="text-2xl active:scale-95" onClick={createChannel} ref={addRef}>+</button>
                 </header>
-                <nav className="w-fit px-4 my-3">
+                <nav className="w-fit px-4 my-3 hidden md:block lg:block">
                     <span className="absolute">🔍</span>
                     <input placeholder="Search..." type="text" className=" focus:outline-none ps-6 rounded-lg text-start border-0 w-full h-10 text-white bg-slate-500"  />
                 </nav>
