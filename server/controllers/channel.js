@@ -44,10 +44,15 @@ export const addMember = async (req, res) => {
         const user = await req.body;
         let channel = await Channel.findById(id).exec();
         let members = channel.members;
-        members = [...members, user];
-        const updateChannel = await Channel.findOneAndUpdate({_id: id}, {members: members});
-        channel = await Channel.findById(id).exec();
-        res.status(201).json({channel});
+        const isFound = members.filter(item => item._id == user._id);
+        if(!isFound.length){
+            members = [...members, user];
+            const updateChannel = await Channel.findOneAndUpdate({_id: id}, {members: members});
+            channel = await Channel.findById(id).exec();
+            res.status(201).json({channel});
+        } else {
+            return res.status(200).json({channel});
+        }
     } catch(err) {
         res.status(400).json({error: err.message});
         console.log(err.message);
