@@ -16,7 +16,7 @@ const ChannelDetails = () => {
     const dispatch = useDispatch();
     const addMember = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/channel/add/${channel._id}`, {
+            const response = await fetch(`https://communityx.onrender.com/channel/add/${channel._id}`, {
                 method:"PUT",
                 headers:{
                     "Content-Type": "application/json",
@@ -24,7 +24,8 @@ const ChannelDetails = () => {
                 },
                 body: JSON.stringify(user)
             });
-            
+            const updatedChannel = await response.json();
+            setMembers([...updatedChannel.channel.members]);
         } catch(err){
             console.log(err.message);
         }
@@ -39,7 +40,8 @@ const ChannelDetails = () => {
             channel_members=[...channel_members, user];
             addMember();
         }
-        setMembers(channel_members);
+        else 
+            setMembers(channel_members);
     }, []) //eslint-disable-line
 
     const handleClick = () => {

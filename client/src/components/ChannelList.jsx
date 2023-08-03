@@ -20,7 +20,7 @@ const ChannelList = () => {
     const [channelList, setChannelList] = useState([]);
     const token = useSelector( (state) => state.token);
     const getChannels = async () => {
-        const response = await fetch ("http://localhost:8000/channel", {
+        const response = await fetch ("https://communityx.onrender.com/channel", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,

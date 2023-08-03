@@ -33,7 +33,7 @@ const SignupPage = () => {
         formData.append("email", email);
         formData.append("password", password);
         
-        const response = await fetch("http://localhost:8000/auth/register", {
+        const response = await fetch("https://communityx.onrender.com/auth/register", {
             method:"POST",
             body: formData,
         });

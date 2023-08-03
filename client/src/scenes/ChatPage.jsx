@@ -13,7 +13,7 @@ const ChatPage = () => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const saveToDB = async (chat) => {
-        const response = await fetch(`http://localhost:8000/chat/send`, {
+        const response = await fetch(`https://communityx.onrender.com/chat/send`, {
             method:"POST",
             headers:{
                 'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ const ChatPage = () => {
         });
     }
     const fetchOldChats = async () => {
-        const response = await fetch(`http://localhost:8000/chat/${room}`,{
+        const response = await fetch(`https://communityx.onrender.com/chat/${room}`,{
             method:"GET",
             headers: {
                 'Authorization': `Bearer ${token}`,

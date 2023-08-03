@@ -8,7 +8,7 @@ const MemberList = ({members}) => {
         {
           members.map((user)=>(
             <div key={user._id} className="h-fit w-full p-2 font-bold mb-1 text-gray-400 flex">
-                <img className="rounded-full border-0 h-10 w-10 mx-3" src={`http://localhost:8000/assets/${user.picturePath}`} alt="img" />
+                <img className="rounded-full border-0 h-10 w-10 mx-3" src={`https://communityx.onrender.com/assets/${user.picturePath}`} alt="img" />
                 <p>{user.name}</p>
             </div>
           ))

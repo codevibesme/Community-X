@@ -13,7 +13,7 @@ const AddChannelPopUp = () => {
             description: desc,
         }
         try {
-            const response = await fetch ("http://localhost:8000/channel/create", {
+            const response = await fetch ("https://communityx.onrender.com/channel/create", {
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json',

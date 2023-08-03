@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Chat = ({chat}) => {
-    const pic = `http://localhost:8000/assets/${chat.picturePath}`;
+    const pic = `https://communityx.onrender.com/assets/${chat.picturePath}`;
     const message = chat.message;
     const name = chat.name;
     return (
