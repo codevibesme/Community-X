@@ -3,17 +3,18 @@ import { useNavigate } from 'react-router';
 import ChatPage from './ChatPage';
 import MemberList from '../components/MemberList.jsx';
 import UserOptions from '../components/UserOptions';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { socket } from "../socket.js";
+import { setRoom } from '../states/stateSlice';
 const ChannelDetails = () => {
+        
     const [members, setMembers] = useState(null);
     const user = useSelector((state)=>state.user);
     const token = useSelector((state)=>state.token);
     const channel = useSelector((state) => state.channel);
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const addMember = async () => {
-        console.log(channel._id);
         try {
             const response = await fetch(`http://localhost:8000/channel/add/${channel._id}`, {
                 method:"PUT",
@@ -23,19 +24,21 @@ const ChannelDetails = () => {
                 },
                 body: JSON.stringify(user)
             });
+            
         } catch(err){
             console.log(err.message);
         }
     }
     useEffect(() => {
-        console.log(channel._id);
+        //adding the member to room
+        socket.emit("join_room", {room: channel._id});
+        dispatch(setRoom({room: channel._id}));
         let channel_members = channel.members || [];
         const findUser = channel_members.filter(item=>item._id === user._id);
         if(findUser.length === 0) {
             channel_members=[...channel_members, user];
             addMember();
         }
-        console.log(channel_members);
         setMembers(channel_members);
     }, []) //eslint-disable-line
 

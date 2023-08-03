@@ -15,7 +15,6 @@ const UserOptions = () => {
     }
   }
   useEffect(()=> {
-    console.log(user.picturePath);
     document.addEventListener("click", handleClickOutside, "false");
     return ()=>{
       document.removeEventListener("click", handleClickOutside, "false");

@@ -4,6 +4,7 @@ const initialState = {
     user: null,
     token: null,
     channel:null,
+    room:null,
     isLoggedIn: false,
 };
 
@@ -23,7 +24,10 @@ export const stateSlice = createSlice({
         setIsLoggedIn: (state) => {
             state.isLoggedIn = !state.isLoggedIn;
         },
+        setRoom: (state, action) => {
+            state.room = action.payload.room;
+        }
     }
 });
-export const {setUser, setToken, setChannel, setIsLoggedIn}  = stateSlice.actions;
+export const {setUser, setToken, setChannel, setIsLoggedIn, setRoom}  = stateSlice.actions;
 export default stateSlice.reducer;

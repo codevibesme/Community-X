@@ -1,14 +1,21 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setChannel } from '../states/stateSlice';
+import { setChannel, setRoom } from '../states/stateSlice';
 import { useNavigate } from 'react-router';
+import { socket } from "../socket.js";
 const ChannelList = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const room = useSelector((state) => state.room)
     const enterChannel = (channel) => {
-        dispatch(setChannel({channel}))
+        if(room){
+            socket.emit("leave_room", {room});
+        }
+        dispatch(setChannel({channel}));
+        dispatch(setRoom(channel._id));
         navigate(`/:${channel.name}`);
+        navigate(0);
     }
     const [channelList, setChannelList] = useState([]);
     const token = useSelector( (state) => state.token);

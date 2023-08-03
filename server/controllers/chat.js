@@ -2,10 +2,11 @@ import Chat from "../models/Chat.js";
 
 export const sendMsg = async (req, res) => {
     try {
-        const {user_id, channel_id, message } = req.body;
+        const {room, name, picturePath, message } = req.body;
         const chat = new Chat({
-            user_id,
-            channel_id,
+            room,
+            name,
+            picturePath,
             message,
         });
         const savedChat = await chat.save();
@@ -16,8 +17,8 @@ export const sendMsg = async (req, res) => {
 };
 export const getMessage = async (req, res) => {
     try {
-        const { channelId }  = req.params;
-        const chats = await Chat.find({channel_id: channelId});
+        const { room }  = req.params;
+        const chats = await Chat.find({room});
         res.status(200).json({chats});
     } catch(err) {
         res.status(503).json({error: err.message});

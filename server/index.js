@@ -46,9 +46,21 @@ const io = new Server(server, {
     },
 });
 
-io.on('connection', (socekt) => {
+io.on('connection', (socket) => {
     console.log('a user connected');
-    socekt.on('disconnect', () => {
+    socket.on("join_room", (data) => {
+        socket.join(data.room.toString());
+        console.log("entered room", data.room);
+    });
+    socket.on("send_message", (data) => {
+        const {message, user } = data;
+        socket.to(data.room.toString()).emit("receive_message", {message, user});
+    });
+    socket.on("leave_room", (data) => {
+        socket.leave(data.room.toString());
+        console.log("left room: ", data.room);
+    })
+    socket.on('disconnect', () => {
         console.log('user disconnected');
     });
 });
